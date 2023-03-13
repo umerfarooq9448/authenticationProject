@@ -1,0 +1,11 @@
+<div class="container1" *ngIf="logstatus" >
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a style="padding-left:  2rem;" class="navbar-brand">Hello,{{fullname}}</a>
+        <div *ngIf="role==='Admin'"> 
+            <button  class="btn btn-primary mr-2"  routerLink="dashboard">Users</button>
+            <button class="btn btn-primary ml-2" >Products</button>
+            
+        </div>
+        <button class="btn btn-danger" (click)="logout()">logout</button>
+      </nav>
+    </div>

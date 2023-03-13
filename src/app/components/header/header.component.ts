@@ -1,31 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/Models/user';
 import { ApiserviceService } from 'src/app/services/apiservice.service';
 import { ServiceService } from 'src/app/services/service.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 
-
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
-export class DashboardComponent implements OnInit {
-
+export class HeaderComponent implements OnInit {
 
   user:any=[]
   fullname:string="";
   role:string=""
+  logstatus:boolean=false;
   constructor(private service:ServiceService,private apiservice:ApiserviceService,private userStore:UserStoreService) { }
 
 
   ngOnInit(): void {
-    this.apiservice.getAllUsers().subscribe(
-      (resp)=>{
-        this.user = resp
-        console.log(resp)
-      }
-    )
+    
+      this.loggedId();
 
       this.userStore.getFullNameFromStore().subscribe(val=>{
         console.log(val)
@@ -43,6 +37,15 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(){
+    this.logstatus = false;
     this.service.signOut()
+
+    
   }
+
+  loggedId(){
+   this.logstatus = this.service.isLoggedIn()
+   
+  }
+
 }

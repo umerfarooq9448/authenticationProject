@@ -13,4 +13,5 @@ export class ApiserviceService {
   getAllUsers(){
     return this.httpclient.get<any>(this.url+"getAllUsers")
   }
+  
 }
